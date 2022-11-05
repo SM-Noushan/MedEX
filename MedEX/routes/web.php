@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+//Admin Login
+Route::prefix('admin')->middleware('ifadmin')->group(function (){
+    Route::get('/', [AdminController::class, 'form_login']);
+    Route::post('/login', [AdminController::class, 'login'])->name('admin.login');
+});
+
+Route::prefix('admin')->middleware('admin')->group(function (){
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+});
+

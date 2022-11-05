@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // $this->call([
-        //     DoctorSeeder::class,
-        //     DoctordetailSeeder::class,
-        // ]);
+        $this->call([
+            AdminSeeder::class,
+            // DoctorSeeder::class,
+            // DoctordetailSeeder::class,
+        ]);
     }
 }
