@@ -16,7 +16,7 @@ use App\Http\Controllers\{AdminController, DoctorController, CounterController};
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
