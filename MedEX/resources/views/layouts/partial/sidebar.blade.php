@@ -73,48 +73,22 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Sub-Categories
+                Counters
                 <i class="fas fa-angle-left right"></i>
-                {{-- <span class="badge badge-info right">6</span> --}}
+                {{-- <span class="badge badge-info right">5</span> --}}
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                {{-- <a href="{{ route('subcategory.index') }}" class="nav-link"> --}}
+                <a href="{{ route('admin.counter.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Sub-Category</p>
+                  <p>Counter: All</p>
                 </a>
               </li>
               <li class="nav-item">
-                {{-- <a href="{{ route('subcategory.create') }}" class="nav-link"> --}}
+                <a href="{{ route('admin.counter.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Sub-Category</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Posts
-                <i class="fas fa-angle-left right"></i>
-                {{-- <span class="badge badge-info right">6</span> --}}
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                {{-- <a href="{{ route('post.index') }}" class="nav-link"> --}}
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Post</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                {{-- <a href="{{ route('post.create') }}" class="nav-link"> --}}
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Publish Post</p>
+                  <p>Counter: Add</p>
                 </a>
               </li>
             </ul>
@@ -122,12 +96,6 @@
           
 
           <li class="nav-header">ACCOUNTS</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">Important</p>
-            </a>
-          </li>
           {{-- <li class="nav-item">
             <a href="{{ route('password.change') }}" class="nav-link">
               <i class="nav-icon far fa-circle text-warning"></i>

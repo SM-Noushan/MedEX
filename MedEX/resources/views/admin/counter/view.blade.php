@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Doctor's List</h1>
+            <h1>Counters's List</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active">Doctor: All</li>
+              <li class="breadcrumb-item active">Counter: All</li>
             </ol>
           </div>
         </div>
@@ -30,7 +30,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List of All Doctors</h3>
+                <h3 class="card-title">List of All Counters</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -39,34 +39,23 @@
                     <thead>
                   <tr>
                     <th>#</th>
-                    <th>Username</th>
                     <th>Name</th>
-                    <th>Department</th>
-                    <th>Degrees</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Photo</th>
+                    <th>Username</th>
+                    <th>Created At</th>
                     <th>Action</th>
                   </tr>
                   </thead>
 
                   <tbody value={{ $key=0 }}>
-                    @foreach ($doctors as $doctor)
+                    @foreach ($counters as $counter)
                     <tr>
                         <td>{{ ++$key }}</td>
-                        <td class="align-middle">{{ $doctor->username }}</td>
-                        <td class="align-middle">{{ $doctor->doctordetail->name }}</td>
-                        <td class="align-middle">{{ $doctor->doctordetail->department }}</td>
-                        <td class="align-middle">{{ $doctor->doctordetail->degrees }}</td>
+                        <td class="align-middle">{{ $counter->countername }}</td>
+                        <td class="align-middle">{{ $counter->username }}</td>
+                        <td class="align-middle">{{ date('d F Y', strtotime($counter->created_at)) }}</td>
                         <td class="align-middle">
-                            {{ $doctor->doctordetail->phone1 }} <br>
-                            {{ $doctor->doctordetail->phone2 }}
-                        </td>
-                        <td class="align-middle">{{ $doctor->doctordetail->email }}</td>
-                        <td class="align-middle text-center"> <img  class="img-thumbnail" width="60" height="50" src="{{ '/'. $doctor->doctordetail->image }}" alt="doc.profile" > </td>
-                        <td class="align-middle">
-                            <a href="{{ route('admin.doctor.edit', $doctor->id) }}" class="btn btn-sm btn-info">Edit</a>
-                            <a href="{{ route('admin.doctor.delete', $doctor->id) }}" class="btn btn-sm btn-danger delete">Delete</a>
+                            <a href="{{ route('admin.counter.edit', $counter->id) }}" class="btn btn-sm btn-info">Edit</a>
+                            <a href="{{ route('admin.counter.delete', $counter->id) }}" class="btn btn-sm btn-danger delete">Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -102,7 +91,7 @@
 <!-- Page specific script -->
 <script>
     $(function () {
-        document.title = "Doctor: All";
+        document.title = "Counter: All";
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]

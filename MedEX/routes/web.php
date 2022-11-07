@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\{AdminController, DoctorController, CounterController};
 
 /*
 |--------------------------------------------------------------------------
@@ -36,14 +36,19 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     //doctors
-    Route::get('/doctor/add', [AdminController::class, 'form_add_doctor'])->name('admin.doctor.create');
-    Route::post('/doctor/add', [AdminController::class, 'add_doctor'])->name('admin.doctor.create');
-    Route::get('/doctor/list', [AdminController::class, 'view_doctor'])->name('admin.doctor.view');
-    Route::get('/doctor/update/{id}', [AdminController::class, 'form_edit_doctor'])->name('admin.doctor.edit');
-    Route::post('/doctor/update/{id}', [AdminController::class, 'edit_doctor'])->name('admin.doctor.edit');
-    Route::get('/doctor/remove/{id}', [AdminController::class, 'delete_doctor'])->name('admin.doctor.delete');
+    Route::get('/doctor/add', [DoctorController::class, 'form_add_doctor'])->name('admin.doctor.create');
+    Route::post('/doctor/add', [DoctorController::class, 'add_doctor'])->name('admin.doctor.create');
+    Route::get('/doctor/list', [DoctorController::class, 'view_doctor'])->name('admin.doctor.view');
+    Route::get('/doctor/update/{id}', [DoctorController::class, 'form_edit_doctor'])->name('admin.doctor.edit');
+    Route::post('/doctor/update/{id}', [DoctorController::class, 'edit_doctor'])->name('admin.doctor.edit');
+    Route::get('/doctor/remove/{id}', [DoctorController::class, 'delete_doctor'])->name('admin.doctor.delete');
 
     //counters
-
+    Route::get('/counter/add', [CounterController::class, 'form_add_counter'])->name('admin.counter.create');
+    Route::post('/counter/add', [CounterController::class, 'add_counter'])->name('admin.counter.create');
+    Route::get('/counter/list', [CounterController::class, 'view_counter'])->name('admin.counter.view');
+    Route::get('/counter/update/{id}', [CounterController::class, 'form_edit_counter'])->name('admin.counter.edit');
+    Route::post('/counter/update/{id}', [CounterController::class, 'edit_counter'])->name('admin.counter.edit');
+    Route::get('/counter/remove/{id}', [CounterController::class, 'delete_counter'])->name('admin.counter.delete');
 });
 
