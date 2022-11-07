@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> --}}
 
   <!-- SweetAlert2 -->
-  {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   {{-- <link rel="stylesheet" href="{{ asset('backend') }}/plugins/sweetalert2/sweetalert2.min.js"> //skip --}}
 
   <!--Toastr Notifications -->
@@ -62,7 +62,6 @@
   </div>
   <!-- ./wrapper -->
 
-@stack('title')
 <!-- jQuery -->
 <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -93,6 +92,7 @@
 <script src="{{ asset('backend') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('backend') }}/dist/js/adminlte.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 {{-- <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('backend') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -100,7 +100,7 @@
 
 
 <!-- DataTables  & Plugins -->
-{{-- <script src="{{ asset('backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
@@ -111,7 +111,9 @@
 <script src="{{ asset('backend') }}/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script> --}}
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+@stack('title')
 
 <!--Toastr Notifications Script -->
 <script src="{{ asset('backend') }}/plugins/toastr/toastr.min.js"></script>
@@ -172,8 +174,9 @@
 </script>
 
 <!--sweet alert delete-->
-{{-- <script>
+<script>
   $(document).on("click", ".delete", function(e){
+    bsCustomFileInput.init();
     e.preventDefault();
     var link = $(this).attr("href");
     Swal.fire({
@@ -201,9 +204,9 @@
     }
     });
   });
-</script> --}}
+</script>
 
-{{-- @stack('all-category-page') --}}
+@stack('all-category-page')
 
 </body>
 </html>

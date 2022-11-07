@@ -48,22 +48,22 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Categories
+                Doctors
                 <i class="fas fa-angle-left right"></i>
-                {{-- <span class="badge badge-info right">6</span> --}}
+                {{-- <span class="badge badge-info right">5</span> --}}
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                {{-- <a href="{{ route('category.index') }}" class="nav-link"> --}}
+                <a href="{{ route('admin.doctor.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Category</p>
+                  <p>Doctor: All</p>
                 </a>
               </li>
               <li class="nav-item">
-                {{-- <a href="{{ route('category.create') }}" class="nav-link"> --}}
+                <a href="{{ route('admin.doctor.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Category</p>
+                  <p>Doctor: Add</p>
                 </a>
               </li>
             </ul>

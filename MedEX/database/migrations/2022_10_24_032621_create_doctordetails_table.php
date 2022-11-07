@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('degrees', 70);
-            $table->string('bloodgroup', 3);
+            $table->string('bloodgroup', 10);
             $table->string('sex', 6);
             $table->string('religion', 15);
             $table->string('email', 50)->unique();
             $table->string('department');
-            $table->text('image')->nullable();
-            $table->string('phone1', 11)->nullable()->unique();
+            $table->text('image');
+            $table->string('phone1', 11)->unique();
             $table->string('phone2', 11)->nullable()->unique();
             $table->unsignedBigInteger('doctor_id');
             $table->timestamps();

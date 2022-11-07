@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 //Admin Login
-Route::prefix('admin')->middleware('ifadmin')->group(function (){
+Route::prefix('/admin')->middleware('iflogged')->group(function (){
     Route::get('/', [AdminController::class, 'form_login']);
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login');
 });
@@ -34,5 +34,16 @@ Route::prefix('admin')->middleware('ifadmin')->group(function (){
 Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    //doctors
+    Route::get('/doctor/add', [AdminController::class, 'form_add_doctor'])->name('admin.doctor.create');
+    Route::post('/doctor/add', [AdminController::class, 'add_doctor'])->name('admin.doctor.create');
+    Route::get('/doctor/list', [AdminController::class, 'view_doctor'])->name('admin.doctor.view');
+    Route::get('/doctor/update/{id}', [AdminController::class, 'form_edit_doctor'])->name('admin.doctor.edit');
+    Route::post('/doctor/update/{id}', [AdminController::class, 'edit_doctor'])->name('admin.doctor.edit');
+    Route::get('/doctor/remove/{id}', [AdminController::class, 'delete_doctor'])->name('admin.doctor.delete');
+
+    //counters
+
 });
 

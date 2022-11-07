@@ -18,7 +18,7 @@
                 <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Username" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 <div class="input-group-append">
                   <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
+                    <span class="fas fa-user"></span>
                   </div>
                 </div>
                 @error('email')
@@ -84,3 +84,10 @@
 
 </div>
 @endsection
+
+@push('title')
+<script type="text/javascript">
+    $(document).ready(function(){
+        document.title = "Admin: Login";
+    });
+</script>
