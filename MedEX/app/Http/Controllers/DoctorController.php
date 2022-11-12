@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Doctor;
-
-use Illuminate\Support\Facades\{File, Hash};
-
-Use App\Models\Doctordetail;
-// use Image;
+use App\Models\{Doctor, Doctordetail, Queuelist, Userdetail, Prescription};
+use Illuminate\Support\Facades\{File, Hash, Auth};
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rule;
-// use App\Http\Requests\StoreDoctorRequest;
-// use App\Http\Requests\UpdateDoctorRequest;
 
 class DoctorController extends Controller
 {
-    //doctor
+    //__Start_Admin_Doctor_Section__//
     public function form_add_doctor()
     {
         return view('admin.doctors.create');
@@ -162,5 +156,53 @@ class DoctorController extends Controller
         $doctordetail->delete();
 
         return redirect()->back()->with('message', 'Successfully Removed');
+    }
+
+    //__End_Admin_Doctor_Section__//
+
+
+
+    //__Start_Doctor_as_an_user_Section__//
+    public function index()
+    {
+        $queuelists = Queuelist::where('doctor_id', Auth::guard('doctor')->user()->id)->orderBy('created_at')->get();
+        return view('doctor.dashboard', compact('queuelists'));
+    }
+
+    public function logout()
+    {
+        Auth::guard('doctor')->logout();
+        session()->flush();
+        return redirect('/')->with('message', 'Signout Successful');
+    }
+
+    public function form_prescribe($id)
+    {
+        $user = Userdetail::where('user_id', $id)->first();
+        return view('doctor.prescription', compact('user'));
+    }
+
+    public function store_prescribe(Request $request, $id)
+    {
+        $json_data = json_encode($request->all());
+        $data = new Prescription;
+        
+        $data->prescription_data = $json_data;
+        $data->user_id = $id;
+        $data->doctor_id = Auth::guard('doctor')->user()->id;
+        $data->save();
+
+        $rmv_queue = Queuelist::where('user_id', $id)->where('doctor_id', Auth::guard('doctor')->user()->id)->first()->delete();
+        return redirect()->route('doctor.dashboard')->with('message', 'Successfully Prescribed');
+    }
+    //__End_Doctor_as_an_user_Section__//
+
+
+
+
+
+    //api
+    public function API_getDoctorsList(){
+        return Doctor::orderBy('id')->get();
     }
 }

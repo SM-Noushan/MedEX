@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Counter;
-
-use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\{Hash, Auth};
 use Illuminate\Validation\Rule;
+
+use App\Models\Queuelist;
 
 class CounterController extends Controller
 {
+    //__Start_Admin_Counter_Section__//
     public function form_add_counter()
     {
         return view('admin.counter.create');
@@ -86,4 +86,40 @@ class CounterController extends Controller
 
         return redirect()->back()->with('message', 'Successfully Removed');
     }
+    //__End_Admin_Counter_Section__//
+
+
+
+
+    //__Start_Counter_as_an_user_Section__//
+
+    public function index()
+    {
+        $queuelists = Queuelist::orderBy('created_at', 'desc')->get();
+        return view('counter.dashboard', compact('queuelists'));
+    }
+
+    public function add_queue(Request $request)
+    {
+        //validation latar
+
+        $queuelist = new Queuelist;
+
+        $queuelist->user_id = 2;
+        $queuelist->doctor_id = 7;
+        $queuelist->counter_id = Auth::guard('counter')->user()->id; 
+
+        $queuelist->save();
+
+        return redirect()->route('counter.dashboard')->with('message', 'Patient Successfully Added To The Queue');
+    }
+
+    public function logout()
+    {
+        Auth::guard('counter')->logout();
+        session()->flush();
+        return redirect('/')->with('message', 'Signout Successful');
+    }
+
+    //__End_Counter_as_an_user_Section__//
 }

@@ -44,6 +44,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'doctor' => [
+            'driver' => 'session',
+            'provider' => 'doctors',
+        ],
+        'counter' => [
+            'driver' => 'session',
+            'provider' => 'counters',
+        ],
         
     ],
 
@@ -72,6 +80,14 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Doctor::class,
+        ],
+        'counters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Counter::class,
         ],
 
         // 'users' => [
@@ -104,6 +120,18 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'doctors' => [
+            'provider' => 'doctors',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'counters' => [
+            'provider' => 'counters',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

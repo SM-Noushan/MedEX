@@ -28,9 +28,9 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/summernote/summernote-bs4.min.css">
 
   <!-- DataTables -->
-  {{-- <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> --}}
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
   <!-- SweetAlert2 -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -43,11 +43,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 
-  <!-- MDB -->
-  <link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
-  rel="stylesheet"
-  />
+  @stack('myCSS')
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -58,6 +54,10 @@
       @include('layouts.partial.topbar')
       @include('layouts.partial.sidebar')
     @endauth
+    @if(session()->has('Role'))
+      @include('layouts.partial.topnav_role')
+      @include('layouts.partial.sidebar')
+    @endif
     @yield('content')
 
   <!-- Control Sidebar -->

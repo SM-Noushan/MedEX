@@ -33,7 +33,7 @@ class AdminController extends Controller
     {
         $check = $request->all();
         if(Auth::guard('admin')->attempt(['username' => $check['email'], 'password' => $check['password']])){
-            return redirect()->route('admin.dashboard')->with('message', 'Sign in successful');
+            return redirect()->route('admin.dashboard')->with('message', 'Log in successful');
         }
         return redirect()->back()->withError('Invalid Credentials');
     }
@@ -41,6 +41,7 @@ class AdminController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
+        session()->flush();
         return redirect('/admin')->with('message', 'Logout Successful');
     }
 }

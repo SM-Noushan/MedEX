@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            $table->text('prescription_image');
+            $table->json('prescription_data');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('doctor_id');
             $table->timestamps();

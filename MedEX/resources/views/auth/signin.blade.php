@@ -7,15 +7,15 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
           <div class="card-header text-center">
-            <a href="{{ url('/admin') }}" class="h1"><b>MedEX: </b>Admin</a>
+            <a href="{{ url('/') }}" class="h1"><b>Sign in </b></a>
           </div>
           <div class="card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Enter your information</p>
       
-            <form action="{{ route('admin.login') }}" method="post">
+            <form action="{{ route('user.login') }}" method="post">
                 @csrf
               <div class="input-group mb-3">
-                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Username" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email/Username" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -41,17 +41,16 @@
                 @enderror
               </div>
               <div class="row">
-                {{-- <div class="col-8">
+                <div class="col-8">
                   <div class="icheck-primary">
                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                     <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
+                        {{ __('Remember Me') }} 
                     </label>
                   </div>
-                </div> --}}
+                </div>
                 <!-- /.col -->
-                <div class="col-8"> </div>
                 <div class="col-4">
                   <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                 </div>
@@ -68,13 +67,11 @@
               </a>
             </div> --}}
             <!-- /.social-auth-links -->
-      
-            {{-- <p class="mb-1">
-              <a href="{{ route('password.request') }}">I forgot my password</a>
+            <p class="mb-1"><a href="">Forgot Password?</a> </p>
+
+            <p class="mb-0">Already have an account?
+              <a href="" class="text-center">Signup now</a>
             </p>
-            <p class="mb-0">
-              <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-            </p> --}}
           </div>
           <!-- /.card-body -->
         </div>
@@ -83,11 +80,14 @@
       <!-- /.login-box -->
 
 </div>
+
 @endsection
 
 @push('title')
 <script type="text/javascript">
-    // $(document).ready(function(){
-        document.title = "Admin: Login";
-    // });
+    // // $(document).ready(function(){
+        document.title = "Signin";
+    //     // bsCustomFileInput.init();
+    // // });
 </script>
+@endpush

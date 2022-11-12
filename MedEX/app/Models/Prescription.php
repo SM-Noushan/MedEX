@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Prescription extends Model
 {
     use HasFactory;
+
+    public function doctors(){
+        return $this->belongsTo(Doctordetail::class, 'doctor_id', 'doctor_id');
+    }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{AdminController, DoctorController, CounterController};
+use App\Http\Controllers\{AdminController, DoctorController, CounterController, UserController, LoginController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +15,15 @@ use App\Http\Controllers\{AdminController, DoctorController, CounterController};
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/dashboard', function () {
+//     return view('user.dashboard');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 //Admin Login
 Route::prefix('/admin')->middleware('iflogged')->group(function (){
@@ -52,3 +52,29 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/counter/remove/{id}', [CounterController::class, 'delete_counter'])->name('admin.counter.delete');
 });
 
+//User Login
+Route::middleware('iflogged')->group(function (){
+    Route::get('/', [LoginController::class, 'form_login']);
+    Route::post('/login', [LoginController::class, 'login'])->name('user.login');
+});
+
+//Patient
+Route::middleware('user')->group(function (){
+    Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::get('/signout', [UserController::class, 'logout'])->name('user.logout');
+});
+
+//Counter
+Route::prefix('counter')->middleware('counter')->group(function (){
+    Route::get('/dashboard', [CounterController::class, 'index'])->name('counter.dashboard');
+    Route::get('/signout', [CounterController::class, 'logout'])->name('counter.logout');
+    Route::post('/queue/add', [CounterController::class, 'add_queue'])->name('counter.queue.add');
+});
+
+//Doctor
+Route::prefix('doctor')->middleware('doctor')->group(function (){
+    Route::get('/dashboard', [DoctorController::class, 'index'])->name('doctor.dashboard');
+    Route::get('/signout', [DoctorController::class, 'logout'])->name('doctor.logout');
+    Route::get('/prescribe/{id}', [DoctorController::class, 'form_prescribe'])->name('doctor.prescribe.form');
+    Route::post('/prescribe/{id}', [DoctorController::class, 'store_prescribe'])->name('doctor.prescribe.store');
+});
