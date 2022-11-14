@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 
-Use App\Models\{Doctor, Counter};
+Use App\Models\{Doctor, Counter, User};
 // use Image;
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rule;
@@ -19,9 +19,10 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $users_count = User::all()->count();
         $doctors_count = Doctor::all()->count();
         $counters_count = Counter::all()->count();
-        return view('admin.dashboard', compact('doctors_count', 'counters_count'));
+        return view('admin.dashboard', compact('users_count', 'doctors_count', 'counters_count'));
     }
 
     public function form_login()

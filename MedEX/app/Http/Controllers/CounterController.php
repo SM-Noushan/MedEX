@@ -122,4 +122,15 @@ class CounterController extends Controller
     }
 
     //__End_Counter_as_an_user_Section__//
+
+
+    //api
+    public function API_addCounter(Request $request){
+        $counter = new Counter;
+        $counter->name = $request->name;
+        $counter->username = $request->username;
+        $counter->password = Hash::make($request->password);
+        $counter->save();
+        return $counter;
+    }
 }

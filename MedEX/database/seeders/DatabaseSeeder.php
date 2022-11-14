@@ -23,14 +23,16 @@ class DatabaseSeeder extends Seeder
         // ]);
         
         \App\Models\User::factory()->create([
-            'email'=> 'molla@molla',
+            'name'  => 'Abu Sakib',
+            'email' => 'sakib@gmail.com',
             'password'=> Hash::make('password'),
         ]);
 
         $this->call([
-            // AdminSeeder::class,
+            AdminSeeder::class,
             // DoctorSeeder::class,
             // DoctordetailSeeder::class,
+            UserdetailSeeder::class,
         ]);
     }
 }

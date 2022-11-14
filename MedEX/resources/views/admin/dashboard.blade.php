@@ -33,9 +33,9 @@
             <div class="col-xl-6">
                 <div class="bg-success p-2">
                   <div class="inner">
-                    <h3>#</h3>
+                    <h3>{{ $users_count }}</h3>
 
-                    <p>...</p>
+                    <p>Registered Users</p>
                   </div>
                   <div class="icon">
                     <i class="fas fa-user-plus"></i>

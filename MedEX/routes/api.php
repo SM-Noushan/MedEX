@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\{DoctorController, CounterController};
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //get doctors list
 Route::get('/doctor/list',[DoctorController::class,'API_getDoctorsList']);
+//add new counter
+Route::post('/counter/add',[CounterController::class,'API_addCounter']);

@@ -13,39 +13,31 @@
       <a href="#" class="nav-link">Dashboard</a>
     </li>
 
-    <div class="d-flex align-items-center">
-      <!-- Avatar -->
-      <div class="dropdown">
-        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false" style="color: black"> Accounts
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-          <li>
-            <a class="dropdown-item" href="#">My profile</a>
-          </li>
-          <li>
-            <a class="dropdown-item" 
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Accounts
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">My profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" 
             @if(session()->get('Role') == 'User')  href="{{ route('user.logout') }}
             @elseif(session()->get('Role') == 'Counter')  href="{{ route('counter.logout') }} 
             @elseif(session()->get('Role') == 'Doctor')  href="{{ route('doctor.logout') }} @endif 
-            
             ">Signout</a>
-          </li>
-        </ul>
       </div>
-
-      <div class="dropdown ml-3">
-        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false" style="color: black"> Repository
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-          <li>
-            <a class="dropdown-item" href="#">Prescriptions</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Reposrt</a>
-          </li>
-        </ul>
+    </li>
+    
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Repository
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Prescriptions</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Reports</a>
       </div>
-    </div>
+    </li>
 
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>

@@ -92,9 +92,10 @@
                                                                   <td class="col-4 text-center">
                                                                     @if ($data->days[$keys] != 0)
                                                                        {{ $data->days[$keys] }}
-                                                                    @endif
-                                                                    {{ $data->daystype[$keys] }}
-                                                                      
+                                                                       {{ $data->daystype[$keys] }}
+                                                                    @elseif ($data->daystype[$keys] == 'continue' )
+                                                                        {{ $data->daystype[$keys] }}
+                                                                    @endif                  
                                                                   </td>
                                                               </tr>
                                                               @endfor

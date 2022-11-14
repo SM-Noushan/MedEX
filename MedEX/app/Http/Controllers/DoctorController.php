@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\{Doctor, Doctordetail, Queuelist, Userdetail, Prescription};
-use Illuminate\Support\Facades\{File, Hash, Auth};
+use Illuminate\Support\Facades\{File, Hash, Auth, DB};
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rule;
 
@@ -198,11 +198,21 @@ class DoctorController extends Controller
     //__End_Doctor_as_an_user_Section__//
 
 
-
-
-
     //api
     public function API_getDoctorsList(){
-        return Doctor::orderBy('id')->get();
+        $doctors = Doctor::orderBy('id')->with('doctordetail')->get();
+        
+        // $data = [];
+        // foreach ($doctors as $key => $doctor)
+        //     $data[] = $doctor->doctordetail;
+        // return $data;
+
+        // $data = DB::table('doctors')
+        // ->join('doctordetails', 'doctors.id', '=', 'doctordetails.doctor_id')
+        // ->select('doctors.username', 'doctordetails.*')
+        // ->get();
+        // return $data;
+
+        return $doctors;
     }
 }

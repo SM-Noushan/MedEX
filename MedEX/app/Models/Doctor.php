@@ -48,4 +48,8 @@ class Doctor extends Authenticatable
     public function doctordetail(){
         return $this->hasOne(Doctordetail::class, 'doctor_id', 'id');
     }
+
+    public function assosiateDetails(){
+        return Doctordetail::where('doctor_id', $this->id)->get();
+    }
 }
