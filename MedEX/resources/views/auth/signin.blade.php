@@ -7,43 +7,34 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
           <div class="card-header text-center">
-            <a href="{{ url('/') }}" class="h1"><b>Sign in </b></a>
+            <a href="{{ url('/') }}" class="h1"><b>MedEx: </b>Signin</a>
           </div>
           <div class="card-body">
-            <p class="login-box-msg">Enter your information</p>
+            <p class="login-box-msg">Enter your signin information</p>
       
             <form action="{{ route('user.login') }}" method="post">
                 @csrf
               <div class="input-group mb-3">
-                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email/Username" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input type="text" name="email" class="form-control" placeholder="Email/Username" @if(Cookie::has('usermail')) value={{ Cookie::get('usermail') }} @endif required autocomplete="email" autofocus>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
                   </div>
                 </div>
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
               </div>
               <div class="input-group mb-3">
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="current-password">
+                <input type="password" name="password" class="form-control" placeholder="Password" @if(Cookie::has('userpass')) value={{ Cookie::get('userpass') }} @endif required autocomplete="password">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
                   </div>
                 </div>
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+                
               </div>
               <div class="row">
                 <div class="col-8">
                   <div class="icheck-primary">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember" @if(Cookie::has('remember')) checked @endif>
 
                     <label class="form-check-label" for="remember">
                         {{ __('Remember Me') }} 
@@ -58,19 +49,10 @@
               </div>
             </form>
       
-            {{-- <div class="social-auth-links text-center mt-2 mb-3">
-              <a href="#" class="btn btn-block btn-primary">
-                <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-              </a>
-              <a href="#" class="btn btn-block btn-danger">
-                <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-              </a>
-            </div> --}}
-            <!-- /.social-auth-links -->
-            <p class="mb-1"><a href="">Forgot Password?</a> </p>
+            <p class="mb-1"><a href="{{ route('password.request') }}">Forgot Password?</a> </p>
 
-            <p class="mb-0">Already have an account?
-              <a href="" class="text-center">Signup now</a>
+            <p class="mb-0">Don't have an account?
+              <a href="{{ route('user.register') }}">Signup now</a>
             </p>
           </div>
           <!-- /.card-body -->

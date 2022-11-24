@@ -10,6 +10,7 @@
     <div class="content-header">
       <div class="container">
 
+        @if(Auth::user()->email_verified_at != null)
         <!-- Main content -->
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center">
@@ -45,7 +46,7 @@
                                             &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                                             {{ $prescription->doctors->phone2 }} 
                                         </span> <hr class="m-2 p-0">
-                            <span style="font-size: 30px">Patient Name: {{ Auth::user()->name }} </span>
+                            <span style="font-size: 30px">Patient Name: {{ Auth::user()->userdetail->name }} </span>
                           </div>
                         </div>
                       </div>
@@ -118,7 +119,33 @@
         
               </div>
             </div>
+        </div>
+        @else
+        <div class="container py-4">
+          <div class="row d-flex">
+            <div>
+              <p class="lead">
+                @if (session()->has('message'))
+                  A new verification link has been sent to the email address you provided during registration.
+                @else
+                  Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?
+                @endif
+                  If you didn't receive the email, we will gladly send you another.
+                <form method="POST" action="{{ route('verification.send') }}">
+                  @csrf
+                    <button type="submit" class="btn btn-info">
+                      @if (session()->has('message'))
+                        Resend Verification Email
+                      @else
+                        Send Verification Email
+                      @endif
+                    </button>
+                </form>
+              </p>
+            </div>
           </div>
+        </div>
+        @endif
 
       </div><!-- /.container-fluid -->
     </div>

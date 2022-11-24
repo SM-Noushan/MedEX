@@ -22,7 +22,8 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        session()->flush();
+        session()->invalidate();
+        session()->regenerateToken();
         // return redirect('/')->with('message', 'Signout Successful');
         return redirect('/')->with('message', 'Signout Successful');
     }

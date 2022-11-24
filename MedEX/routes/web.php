@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\{AdminController, DoctorController, CounterController, UserController, LoginController};
+use Illuminate\Support\Facades\{Route, Auth};
+use App\Http\Controllers\{AdminController, DoctorController, CounterController, UserController, LoginController, MailController};
+use App\Http\Controllers\Auth\{PasswordResetLinkController, NewPasswordController};
 
 /*
 |--------------------------------------------------------------------------
@@ -52,15 +52,34 @@ Route::prefix('admin')->middleware('admin')->group(function (){
     Route::get('/counter/remove/{id}', [CounterController::class, 'delete_counter'])->name('admin.counter.delete');
 });
 
+
+// Email Verification for New User  __Start
+Route::prefix('dashboard/email')->middleware('auth')->group(function (){
+    Route::get('/verify', [MailController::class, 'index'])->name('verification.notice');
+    Route::post('/verification-notification', [MailController::class, 'verify'])->middleware('throttle:6,1')->name('verification.send');
+    Route::get('/verify/{id}/{hash}', [MailController::class, 'verify_confirm'])->middleware('signed')->name('verification.verify');
+});
+// Email Verification for New User  __END
+
+
 //User Login
 Route::middleware('iflogged')->group(function (){
     Route::get('/', [LoginController::class, 'form_login']);
-    Route::post('/login', [LoginController::class, 'login'])->name('user.login');
+    Route::post('/signin', [LoginController::class, 'login'])->name('user.login');
+    Route::get('/signup', [LoginController::class, 'form_register'])->name('user.register');
+    Route::post('/signup', [LoginController::class, 'register'])->name('user.register.store');
+    
+    Route::get('/password/request', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/password/request', [PasswordResetLinkController::class, 'store'])->name('password.request');
+    Route::get('/reset-password', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.reset');
 });
 
 //Patient
 Route::middleware('user')->group(function (){
-    Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::middleware('verified')->group(function (){
+        Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    });
     Route::get('/signout', [UserController::class, 'logout'])->name('user.logout');
 });
 

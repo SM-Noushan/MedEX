@@ -22,7 +22,7 @@ class CounterController extends Controller
         $request->validate([
             'username'  => 'required|string|unique:counters,username',
             'password'  => 'required|min:8|max:32',
-            'name'      => 'required|string|unique:counters,countername',
+            'name'      => 'required|string|unique:counters,countername|max:10',
         ],
         [
             'username.unique'    => 'Username already exists',
@@ -59,7 +59,7 @@ class CounterController extends Controller
                         ],
             'password'  => 'nullable|min:8|max:32',
             'name'      => [
-                            'nullable','required','string',
+                            'nullable','required','string','max:10',
                             Rule::unique('counters','countername')->ignore($id)
                         ],
         ],
@@ -127,10 +127,10 @@ class CounterController extends Controller
     //api
     public function API_addCounter(Request $request){
         $counter = new Counter;
-        $counter->name = $request->name;
+        $counter->countername = $request->name;
         $counter->username = $request->username;
         $counter->password = Hash::make($request->password);
         $counter->save();
-        return $counter;
+        return $request;
     }
 }

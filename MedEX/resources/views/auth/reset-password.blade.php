@@ -1,51 +1,64 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.app')
 
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
-
-            <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+<div class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="{{ url('/') }}" class="h1"><b>MedEX: </b>Reset</a>
             </div>
+            <div class="card-body">
+                <p class="login-box-msg">You are only one step a way, recover your password now.</p>
+                <form action="{{ route('password.reset') }}" method="post">
+                    @csrf
+                    <!-- Password Reset Token -->
+                    <input type="hidden" name="token" value="{{ $request->token }}">
+                    <!-- Password Reset Email -->
+                    <input type="hidden" name="email" value="{{ $request->email }}">
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @if($errors->has('password'))
+                        <div class="input-group">
+                            <span class="text-danger">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Reset password</button>
+                        </div>
+                    <!-- /.col -->
+                    </div>
+                </form>
+                <p class="mt-3 mb-1 text-muted">
+                    Back To <a href="{{ url('/') }}">Signin</a>
+                </p>
             </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
-                    {{ __('Reset Password') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+<!-- /.login-box -->
+</div>
+@endsection
+    
+@push('title')
+<script type="text/javascript">
+        document.title = "Password Reset";
+</script>
+@endpush

@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
             $table->string('email', 50)->unique();
             $table->string('password', 60);
-            // $table->string('status', 10)->default('Pending');
+            $table->string('status', 10)->default('Ok');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
