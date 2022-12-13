@@ -52,7 +52,6 @@ return [
             'driver' => 'session',
             'provider' => 'counters',
         ],
-        
     ],
 
     /*

@@ -196,23 +196,4 @@ class DoctorController extends Controller
         return redirect()->route('doctor.dashboard')->with('message', 'Successfully Prescribed');
     }
     //__End_Doctor_as_an_user_Section__//
-
-
-    //api
-    public function API_getDoctorsList(){
-        $doctors = Doctor::orderBy('id')->with('doctordetail')->get();
-        
-        // $data = [];
-        // foreach ($doctors as $key => $doctor)
-        //     $data[] = $doctor->doctordetail;
-        // return $data;
-
-        // $data = DB::table('doctors')
-        // ->join('doctordetails', 'doctors.id', '=', 'doctordetails.doctor_id')
-        // ->select('doctors.username', 'doctordetails.*')
-        // ->get();
-        // return $data;
-
-        return $doctors;
-    }
 }

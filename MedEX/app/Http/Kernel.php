@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\User::class,
         'counter' => \App\Http\Middleware\Counter::class,
         'doctor' => \App\Http\Middleware\Doctor::class,
+        'ApiAuth' => \App\Http\Middleware\APIAuth::class,
     ];
 }
